@@ -1,4 +1,7 @@
-import { Schema, model } from 'mongoose'
+import { Schema, model, Document } from 'mongoose'
+import { UserInterface } from '../interfaces/user.interface'
+
+//interface UserModel extends UserInterface, Document { }
 
 const userSchema = new Schema({
     name: {

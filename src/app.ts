@@ -2,19 +2,26 @@ import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
 
+import userRoute from './routes/user.route'
+
 export class App {
     private express: express.Application
     private port = 9000
 
     constructor() {
         this.express = express()
-        this.listen()
-        this.middlewares()
         this.database()
+        this.middlewares()
+        this.routes()
+        this.listen()
     }
 
     public getApp(): express.Application {
         return this.express
+    }
+
+    private database(): void {
+        mongoose.connect('mongodb://localhost/curso_nodejs_typescript')
     }
 
     private middlewares(): void {
@@ -22,13 +29,13 @@ export class App {
         this.express.use(cors())
     }
 
+    private routes(): void {
+        this.express.use('/users', userRoute)
+    }
+
     private listen(): void {
         this.express.listen(this.port, () => {
             console.log(`Servidor iniciado na porta ${this.port}`)
         })
-    }
-
-    private database(): void {
-        mongoose.connect('mongodb://localhost/curso_nodejs_typescript')
     }
 }
