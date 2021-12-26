@@ -28,6 +28,17 @@ class UserController {
             token: user.generateToken()
         })
     }
+    public getById(req: Request, res: Response): Response {
+        return res.json(req.userReceiver)
+    }
+
+    public async list(req: Request, res: Response): Promise<Response> {
+        const userLoggedId = req.user._id
+
+        const users = await UserModel.find({ _id: { $ne: userLoggedId } })
+
+        return res.json(users)
+    }
 }
 
 export default new UserController

@@ -6,14 +6,32 @@ class MessageController {
         const message = await MessageModel.create({
             text: req.body.text,
             sender: req.user._id,
-            receiver: req.userChat._id
+            receiver: req.userReceiver._id
         })
 
         return res.json(message)
     }
 
     public async list(req: Request, res: Response): Promise<Response> {
+        const userId = req.user._id
+        const userReceiverId = req.userReceiver._id
 
+        const messages = await MessageModel.find({
+            $or: [
+                { $and: [{ sender: userId }, { receiver: userReceiverId }] },
+                { $and: [{ sender: userReceiverId }, { receiver: userId }] }
+            ]
+        }).sort('createdAt')
+
+        const messagesChat = messages.map((message) => {
+            return {
+                text: message.text,
+                isReceiver: message.receiver == String(userReceiverId),
+                createdAt: message.createdAt
+            }
+        })
+
+        return res.json(messagesChat);
     }
 }
 

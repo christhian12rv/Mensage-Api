@@ -33,7 +33,7 @@ class AuthMiddleware {
             if (!user)
                 return res.status(400).send({ message: 'Usuário inválido' })
 
-            req.userChat = user
+            req.userReceiver = user
 
             return next()
         } catch (error) {
