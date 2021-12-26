@@ -1,5 +1,7 @@
 import { Request, Response } from 'express'
 import UserModel from '../models/user.model'
+import MessageModel from '../models/message.model'
+import messageService from '../services/message.service'
 
 class UserController {
     public async register(req: Request, res: Response): Promise<Response> {
@@ -37,7 +39,14 @@ class UserController {
 
         const users = await UserModel.find({ _id: { $ne: userLoggedId } })
 
-        return res.json(users)
+        const userMessage = await Promise.all(users.map(async (user) => {
+            const messages = await MessageModel.findChat(userLoggedId, String(user._id)).sort({ 'createdAt': -1 }).limit(1)
+            return messageService.getUserMessage(user, messages)
+        }))
+
+        const userMessageOrdened = messageService.orderUserMessage(userMessage)
+
+        return res.json(userMessageOrdened)
     }
 }
 

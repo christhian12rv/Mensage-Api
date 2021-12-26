@@ -1,8 +1,10 @@
-import { Schema, model } from 'mongoose'
+import { Schema, model, Model, Document } from 'mongoose'
 import { MessageInterface } from '../interfaces/message.interface'
 
-interface MessageModel extends MessageInterface, Document {
+interface MessageModel extends MessageInterface, Document { }
 
+interface MessageStatic extends Model<MessageModel> {
+    findChat(userId: string, userReceiverId: string): Promise<Array<MessageModel>>
 }
 
 const messageSchema = new Schema({
@@ -26,4 +28,13 @@ const messageSchema = new Schema({
     }
 })
 
-export default model<MessageModel>('Message', messageSchema)
+messageSchema.statics.findChat = function (userId: string, userReceiverId: string): Promise<Array<MessageModel>> {
+    return this.find({
+        $or: [
+            { $and: [{ sender: userId }, { receiver: userReceiverId }] },
+            { $and: [{ sender: userReceiverId }, { receiver: userId }] }
+        ]
+    })
+}
+
+export default model<MessageModel, MessageStatic>('Message', messageSchema)

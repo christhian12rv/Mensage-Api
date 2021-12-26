@@ -22,7 +22,10 @@ export class App {
     }
 
     private database(): void {
-        mongoose.connect('mongodb://localhost/curso_nodejs_typescript')
+        mongoose.connect('mongodb://localhost/curso_nodejs_typescript', (error) => {
+            if (!error)
+                console.log('Conectado ao MongoDB')
+        })
     }
 
     private middlewares(): void {
