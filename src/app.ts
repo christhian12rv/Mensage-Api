@@ -2,6 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
 
+import messageRoute from './routes/message.route'
 import userRoute from './routes/user.route'
 
 export class App {
@@ -30,6 +31,7 @@ export class App {
     }
 
     private routes(): void {
+        this.express.use('/messages', messageRoute)
         this.express.use('/users', userRoute)
     }
 

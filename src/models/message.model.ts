@@ -1,6 +1,11 @@
 import { Schema, model } from 'mongoose'
+import { MessageInterface } from '../interfaces/message.interface'
 
-const mensageSchema = new Schema({
+interface MessageModel extends MessageInterface, Document {
+
+}
+
+const messageSchema = new Schema({
     text: {
         type: String,
         required: true
@@ -21,4 +26,4 @@ const mensageSchema = new Schema({
     }
 })
 
-export default model('Mensage', mensageSchema)
+export default model<MessageModel>('Message', messageSchema)
