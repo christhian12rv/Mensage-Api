@@ -1,0 +1,24 @@
+.button-login {
+    align-self: center;
+    background-image: linear-gradient(45deg, #5bb5e5, #5d5be5);
+    color: #fff;
+    font-size: 1em;
+    width: 70%;
+    height: auto;
+    padding: 1em;
+    margin-top: 1em;
+    border: none;
+    border-radius: 1.75em;
+}
+
+@media screen and (max-width: 768px) {
+    .button-login {
+        padding: .5em;
+        margin-top: 0em;
+    }
+}
+
+.button-login:hover {
+    background-image: linear-gradient(45deg, #4689ad, #4543a8);
+    cursor: pointer;
+}

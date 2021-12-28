@@ -1,0 +1,6 @@
+.user-messages-tab {
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    gap: 1em;
+}

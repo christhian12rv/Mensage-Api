@@ -1,0 +1,14 @@
+.input-login {
+    background-color: transparent;
+    border: none;
+    padding: .5em;
+    width: 70%;
+    align-self: center;
+    font-size: 1em;
+    border-bottom: 2px solid rgb(184, 184, 184);
+    outline: none;
+}
+
+.input-login:hover, .input-login:focus {
+    border-bottom-color: #5d5be5;
+}

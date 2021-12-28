@@ -14,6 +14,10 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
+    username: {
+        type: String,
+        required: true
+    },
     password: {
         type: String,
         required: true
@@ -42,6 +46,7 @@ UserSchema.methods.generateToken = function (): string {
     const decodedToken = {
         _id: String(this._id),
         name: this.name,
+        username: this.username,
         avatar: this.avatar
     }
 

@@ -1,0 +1,22 @@
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #e0f2f1;
+    color: #263238;
+    height: 50px;
+    padding: 0 1em;
+    border-bottom: 1px solid #cfd8dc;
+    overflow: hidden;
+}
+
+.header-container .user-name-container {
+    display: flex;
+    align-items: center;
+    gap: .5em;
+}
+
+.header-container .user-name-container img {
+    height: 2em;
+    width: 2em;
+}

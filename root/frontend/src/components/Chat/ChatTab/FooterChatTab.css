@@ -1,0 +1,21 @@
+.footer-chat-tab {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    padding-top: .5em;
+    padding-bottom: .5em;
+    padding-left: 1em;
+    padding-right: 1em;
+    border-top: 1px solid #cfd8dc;
+}
+
+.footer-chat-tab .send-message-button {
+    color: #80cbc4;
+    font-size: 2em;
+    transition: all .25s ease;
+}
+
+.footer-chat-tab .send-message-button:hover {
+    color: #263238;
+    cursor: pointer;
+}

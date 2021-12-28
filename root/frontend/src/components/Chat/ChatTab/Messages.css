@@ -1,0 +1,34 @@
+.message-tab {
+    display: flex;
+    gap: 1em;
+}
+
+.message-tab img {
+    background-color: white;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+
+.message-tab .message {
+    padding: 1em;
+    border-radius: 1em;
+}
+
+.message-tab .message.is-receiver {
+    border-top-left-radius: 0;
+    background-image: linear-gradient(360deg, #5bb5e5, #5B86E5);
+}
+
+.message-tab .message:not(.is-receiver) {
+    border-top-right-radius: 0;
+    background-image: linear-gradient(#304352, #ada9a4);
+}
+
+.message-tab .message p {
+    color: #FAFAFA;
+}
+
+.message-tab .message small {
+    color: #d0d0d0;
+}

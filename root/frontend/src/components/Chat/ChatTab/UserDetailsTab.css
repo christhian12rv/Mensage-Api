@@ -1,0 +1,21 @@
+.user-details-tab {
+    display: flex;
+    gap: 1em;
+    padding: 1em;
+    border-bottom: 1px solid #cfd8dc;
+}
+
+.user-details-tab * {
+    color: #263238;
+}
+
+.user-details-tab .user-identifier {
+    color: #62727b;
+}
+
+.user-details-tab img {
+    background-color: white;
+    width: auto;
+    height: 100%;
+    border-radius: 50%;
+}

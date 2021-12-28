@@ -1,0 +1,70 @@
+.register-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-image: linear-gradient(45deg, #5bb5e5, #5d5be5);
+    width: 100vw;
+    height: 100vh;
+}
+
+.register-container .register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+    background-color: #fff;
+    padding: 2em;
+    width: 35%;
+    height: 60%;
+    border-radius: .75em;
+}
+
+.register-container .register-form h1 {
+    text-align: center;
+}
+
+.register-container .register-form hr {
+    background-color: rgb(233, 233, 233);
+}
+
+.register-container .register-form input, p {
+    color: rgb(58, 58, 58);
+}
+
+.register-container .register-form p {
+    align-self: center;
+    text-align: center;
+    font-weight: bold;
+}
+
+.register-container .register-form p .login-link {
+    color: rgb(0, 102, 255);
+    text-decoration: none;
+}
+
+.register-container .register-form p .login-link:hover {
+    color: rgb(0, 70, 175);
+}
+
+.register-container .register-form .input-container {
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+}
+
+@media screen and (max-width: 568px) {
+    .register-container .register-form {
+        height: 45%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .register-container .register-form h1 {
+        font-size: 1.3em;
+    }
+
+    .register-container .register-form {
+        gap: .75em;
+    }
+}
