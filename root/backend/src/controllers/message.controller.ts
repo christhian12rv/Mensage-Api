@@ -16,7 +16,7 @@ class MessageController {
         const userId = req.user._id
         const userReceiverId = req.userReceiver._id
 
-        const messages = await MessageModel.findChat(userId, userReceiverId).sort({ 'createdAt': -1 })
+        const messages = await MessageModel.findChat(userId, userReceiverId).sort({ 'createdAt': 1 })
 
         const messagesChat = messages.map((message) => {
             return {

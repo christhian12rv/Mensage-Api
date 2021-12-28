@@ -7,8 +7,8 @@
     transition: all .25s ease;
 }
 
-.contact-item-container:hover, .contact-item-container:focus {
-    background-image: linear-gradient(360deg, #00B4DB, #0090b0);
+.contact-item-container:hover, .contact-item-container.chating {
+    background-image: linear-gradient(360deg, #00B4DB, hsl(191, 100%, 35%));
     cursor: pointer;
 }
 
@@ -16,7 +16,7 @@
     color: #424242;
 }
 
-.contact-item-container:hover *, .contact-item-container:focus * {
+.contact-item-container:hover *, .contact-item-container:focus *, .contact-item-container.chating * {
     color: #FAFAFA;
 }
 

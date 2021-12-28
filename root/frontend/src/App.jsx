@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import Header from './components/Chat/Header/Header';
-import Contacts from './components/Chat/Contacts/Contacts'
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import io from "socket.io-client";
 import { isExpired, decodeToken } from "react-jwt";
 
 import './App.css'
-import FooterChatTab from './components/Chat/ChatTab/FooterChatTab';
-import UserMessagesTab from './components/Chat/ChatTab/UserMessagesTab';
-import UserDetailsTab from './components/Chat/ChatTab/UserDetailsTab';
+import Header from './components/Chat/Header/Header';
+import Contacts from './components/Chat/Contacts/Contacts'
+import ChatTab from './components/Chat/ChatTab/ChatTab'
 import Login from './components/Register and Login/Login';
 import Register from './components/Register and Login/Register';
 
@@ -22,23 +20,29 @@ const App = () => {
 
   let socket;
   useEffect(() => {
+    generateUsers()
+
+    const token = localStorage.getItem('token_key')
+    const expiredToken = isExpired(token)
+    let decodedToken = ''
+    if (token && !expiredToken)
+      decodedToken = decodeToken(token)
+
     socket = io()
 
-    socket.on('connection', (sock) => {
+    socket.on('connection', (socketId) => {
       console.log('Conectado')
+      console.log(decodedToken._id)
+      socket.emit('connected', decodedToken._id, socketId)
     })
-  }, [])
-
-
-  useEffect(() => {
-    generateUsers()
   }, [])
 
   useEffect(() => {
     handleGetLastMessages()
   }, [userConnected])
 
-  const generateUsers = () => {
+
+  const generateUsers = async () => {
     const token = localStorage.getItem('token_key')
     const expiredToken = isExpired(token)
     if (token && !expiredToken) {
@@ -48,8 +52,6 @@ const App = () => {
     } else
       setUserConnected({})
   }
-
-
 
   const tokenExists = () => {
     const token = localStorage.getItem('token_key')
@@ -73,6 +75,7 @@ const App = () => {
     })
     let data = await response.json();
     data = data.filter(d => d.lastMessage)
+      .sort((a, b) => (a.lastMessageDate > b.lastMessageDate) ? -1 : ((b.lastMessageDate > a.lastMessageDate) ? 1 : 0))
     setUsers(data)
   }
 
@@ -81,7 +84,6 @@ const App = () => {
       headers: { 'x-access-token': userConnected.token }
     })
     const data = await response.json()
-
     setUserChating(user)
     setMessagesUserChating(data)
   }
@@ -106,12 +108,14 @@ const App = () => {
                       focusUsersChat={focusUsersChat}
                       setFocusUsersChat={setFocusUsersChat}
                       onClickUser={onClickUser}
+                      userChating={userChating}
                     />
-                    <div className="chat-tab">
-                      <UserDetailsTab userChating={userChating} />
-                      <UserMessagesTab userChating={userChating} messagesUserChating={messagesUserChating} />
-                      <FooterChatTab />
-                    </div>
+                    <ChatTab
+                      userChating={userChating}
+                      messagesUserChating={messagesUserChating}
+                      setMessagesUserChating={setMessagesUserChating}
+                      handleGetLastMessages={handleGetLastMessages}
+                      socket={socket} />
                   </div>
                 </div>
               </>

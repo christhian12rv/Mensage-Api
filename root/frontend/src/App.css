@@ -9,8 +9,3 @@
     width: 100%;
     height: calc(100vh - 50px);
 }
-
-.container .chat-container .chat-tab {
-    display: grid;
-    grid-template-rows: 73px auto 60px;
-}

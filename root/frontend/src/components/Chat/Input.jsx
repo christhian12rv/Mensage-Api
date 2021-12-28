@@ -21,6 +21,7 @@ const Input = ({ inputSearchFocus, setInputSearchFocus, inputSearch, placeholder
     return (
         <input
             className='input-search'
+            id='input-search'
             ref={inputSearch}
             onFocus={handleInputSearchFocus}
             onBlur={handleInputSearchFocus}

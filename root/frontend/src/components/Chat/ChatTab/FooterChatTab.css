@@ -1,7 +1,8 @@
-.footer-chat-tab {
+.footer-chat-tab #form-send-message {
     display: flex;
     align-items: center;
     gap: 1em;
+    height: calc(100% - 1em);
     padding-top: .5em;
     padding-bottom: .5em;
     padding-left: 1em;
@@ -9,13 +10,19 @@
     border-top: 1px solid #cfd8dc;
 }
 
-.footer-chat-tab .send-message-button {
+.footer-chat-tab #form-send-message button {
+    background-color: transparent;
+    border: none;
+    text-decoration: none;
+}
+
+.footer-chat-tab #form-send-message .send-message-button {
     color: #80cbc4;
     font-size: 2em;
     transition: all .25s ease;
 }
 
-.footer-chat-tab .send-message-button:hover {
+.footer-chat-tab #form-send-message .send-message-button:hover {
     color: #263238;
     cursor: pointer;
 }

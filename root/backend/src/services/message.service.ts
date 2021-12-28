@@ -10,7 +10,7 @@ class MessageService {
             avatar: user.avatar,
             lastMessage: messages[0]?.text || null,
             lastMessageDate: messages[0]?.createdAt || null,
-            isReceiver: messages[0]?.receiver == user._id
+            isReceiver: String(messages[0]?.receiver) == String(user._id)
         }
     }
 

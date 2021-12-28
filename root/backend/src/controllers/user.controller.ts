@@ -54,9 +54,9 @@ class UserController {
 
         const userMessage = await Promise.all(users.map(async (user) => {
             const messages = await MessageModel.findChat(userLoggedId, String(user._id)).sort({ 'createdAt': -1 }).limit(1)
+
             return messageService.getUserMessage(user, messages)
         }))
-
         const userMessageOrdened = messageService.orderUserMessage(userMessage)
 
         return res.json(userMessageOrdened)

@@ -8,6 +8,8 @@ import socketio from 'socket.io';
 import messageRoute from './routes/message.route'
 import userRoute from './routes/user.route'
 
+const users = []
+
 export class App {
     private express: express.Application
     private port = 5000
@@ -52,8 +54,13 @@ export class App {
 
     private ioConnection(): void {
         this.io.on('connection', (socket) => {
-            console.log('Conectado');
-            this.io.emit('connection', null)
+            this.io.emit('connection', socket.id)
+
+            socket.on('connected', (userId, socketId) => {
+                if (!(userId in users['userId']))
+                    users.push({ userId, socketId })
+                console.log(users)
+            })
         });
     }
 
