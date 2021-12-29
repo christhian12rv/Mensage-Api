@@ -3,17 +3,24 @@ import { BiSend } from 'react-icons/bi'
 import { useNavigate } from 'react-router-dom'
 import { isExpired, decodeToken } from "react-jwt";
 import { toast } from 'react-toastify';
-
+import io from "socket.io-client";
 import InputChatTab from '../ChatTab/InputChatTab'
 
 import './FooterChatTab.css'
 
-const FooterChatTab = ({ userChating, messagesUserChating, setMessagesUserChating, handleGetLastMessages, socket }) => {
+const FooterChatTab = ({ userChating, messagesUserChating, setMessagesUserChating, handleGetLastMessages }) => {
     const navigate = useNavigate()
     const [textInputChatTab, setTextInputChatTab] = useState('')
-
+    let socket;
+    socket = io()
+    useState(() => {
+        socket.on('receiveMessage', (asdf) => {
+            console.log('testa')
+            handleFormSend(null)
+        })
+    })
     const handleFormSend = (e) => {
-        e.preventDefault()
+        e && e.preventDefault()
         const sendMessage = async () => {
             const token = localStorage.getItem('token_key')
             const expiredToken = isExpired(token)
@@ -40,10 +47,7 @@ const FooterChatTab = ({ userChating, messagesUserChating, setMessagesUserChatin
                 if (inputSearch.value.trim() == '')
                     handleGetLastMessages()
 
-                const decodedToken = decodeToken(token)
-                console.log(decodedToken)
-
-                socket.join('[' + String(decodedToken._id) + ',' + String(userChating._id))
+                socket.emit('join', { fromId: userChating._id })
             }
             else
                 toast.error('Houver um erro ao tentar enviar a mensagem', {

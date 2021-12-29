@@ -19,7 +19,8 @@ const App = () => {
   const [messagesUserChating, setMessagesUserChating] = useState([{}])
 
   let socket;
-  useEffect(() => {
+  socket = io('http://localhost:3000')
+  const useTest = () => useEffect(() => {
     generateUsers()
 
     const token = localStorage.getItem('token_key')
@@ -28,14 +29,18 @@ const App = () => {
     if (token && !expiredToken)
       decodedToken = decodeToken(token)
 
-    socket = io()
-
     socket.on('connection', (socketId) => {
-      console.log('Conectado')
-      console.log(decodedToken._id)
-      socket.emit('connected', decodedToken._id, socketId)
+      console.log('Conectado!')
+      socket.emit('connected', decodedToken._id)
     })
+    socket.on('teste', (msg) => {
+      console.log('deuuu ' + msg)
+    })
+
+    return () => socket.disconnect()
   }, [])
+
+  useTest()
 
   useEffect(() => {
     handleGetLastMessages()
@@ -73,6 +78,8 @@ const App = () => {
     const response = await fetch('http://localhost:5000/users', {
       headers: { 'x-access-token': token ? token : userConnected.token }
     })
+    if (response.status != 200)
+      return
     let data = await response.json();
     data = data.filter(d => d.lastMessage)
       .sort((a, b) => (a.lastMessageDate > b.lastMessageDate) ? -1 : ((b.lastMessageDate > a.lastMessageDate) ? 1 : 0))

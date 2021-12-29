@@ -13,7 +13,7 @@ const ChatTab = ({ userChating, messagesUserChating, setMessagesUserChating, han
     if (isUserChating) return (
         <div className="chat-tab">
             <UserDetailsTab userChating={userChating} />
-            <UserMessagesTab userChating={userChating} messagesUserChating={messagesUserChating} />
+            <UserMessagesTab key={userChating} userChating={userChating} messagesUserChating={messagesUserChating} />
             <FooterChatTab
                 userChating={userChating}
                 messagesUserChating={messagesUserChating}

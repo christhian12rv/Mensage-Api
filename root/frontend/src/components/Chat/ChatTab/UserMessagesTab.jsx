@@ -11,7 +11,7 @@ const UserMessagesTab = ({ userChating, messagesUserChating }) => {
     }, [messagesUserChating])
     return (
         <div className="user-messages-tab" id="user-messages-tab">
-            {messagesUserChating.map((message => <Messages userChating={userChating} message={message} />))}
+            {messagesUserChating.map((message => <Messages key={message._id} userChating={userChating} message={message} />))}
         </div>
     )
 }

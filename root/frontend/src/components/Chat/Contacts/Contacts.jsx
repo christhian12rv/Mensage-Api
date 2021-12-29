@@ -8,7 +8,6 @@ import './Contacts.css'
 const Contacts = ({ users, setUsers, handleGetUsers, handleGetLastMessages, setUsersChat, focusUsersChat, setFocusUsersChat, onClickUser, userChating }) => {
     const [inputSearchFocus, setInputSearchFocus] = useState(false)
     const inputSearch = useRef(null)
-    console.log(users)
     return (
         <div className="contacts-container">
             <div className="input-container">
@@ -31,8 +30,8 @@ const Contacts = ({ users, setUsers, handleGetUsers, handleGetLastMessages, setU
                 </div>
             </div>
             <div className="contacts">
-                {focusUsersChat ? users.map((user) => <ContactItem userChating={userChating} user={user} focusUsersChat={focusUsersChat} onClickUser={onClickUser} />)
-                    : users.map((user) => <ContactItem userChating={userChating} user={user} focusUsersChat={focusUsersChat} onClickUser={onClickUser} />)}
+                {focusUsersChat ? users.map((user) => <ContactItem key={user._id} userChating={userChating} user={user} focusUsersChat={focusUsersChat} onClickUser={onClickUser} />)
+                    : users.map((user) => <ContactItem key={user._id} userChating={userChating} user={user} focusUsersChat={focusUsersChat} onClickUser={onClickUser} />)}
             </div>
         </div>
     )
